@@ -1,0 +1,21 @@
+sudo apt-get update
+sudo apt-get install apache2 #install apache2
+sudo apt-get install mysql-server -y # install mysql
+
+sudo apt-get install php -y
+sudo apt-get install -y php-{bcmath,bz2,intl,gd,mbstring,mcrypt,mysql,zip} && sudo apt-get install libapache2-mod-php  -y
+
+mysql user phpUser pw phpUser1
+
+
+
+#mysql setup
+create database main;
+use main;
+create table latestValues(
+id int not null auto_increment primary key,
+tagName varchar(50),
+lastUpdate datetime,
+startTime datetime,
+value varchar(255)
+);
