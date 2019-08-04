@@ -38,7 +38,9 @@
             <tbody id="latestValues">
             </tbody>
         </table>
-<script src = "js/jquery-3.3.1.min.js"></script>
+        <input type="text" id="inputNewTagName">
+        <button class="myButtons" id="buttonNewTag">Add new tag</button>
+        <script src = "js/jquery-3.3.1.min.js"></script>
 		<script src = "js/jquery-ui.min.js"></script>
         <script>
             var nodeId = -1;
@@ -59,6 +61,27 @@
                         },
                         'json'
                     );
+                });
+                $("#buttonNewTag").click(function(){
+                    var tagName = $("#inputNewTagName").val();
+                    value = '0.0';
+                    if(tagName.length > 0){
+                        $.post(
+                            'api/updateTag.php',
+                            {
+                                tagName: tagName,
+                                value: value
+                            },
+                            function(data){
+                                console.log(JSON.stringify(data));
+                                $("#inputNewTagName").val('');
+                                updateValues();
+                            },
+                            'json'
+                        );
+                    } else {
+                        alert("Must enter new tag name");
+                    }
                 });
                 updateValues();
             });
