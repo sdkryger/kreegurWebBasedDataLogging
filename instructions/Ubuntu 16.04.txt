@@ -5,13 +5,22 @@ sudo apt-get install mysql-server -y # install mysql
 sudo apt-get install php -y
 sudo apt-get install -y php-{bcmath,bz2,intl,gd,mbstring,mcrypt,mysql,zip} && sudo apt-get install libapache2-mod-php  -y
 
-mysql user phpUser pw phpUser1
+#mysql user phpUser pw phpUser1
+#mysql user roor pw rootroot
+# set folder access info in /etc/apache2/apache2.conf
+# configure ports in /etc/apache2/ports.conf
+# set document root in /etc/apache2/sites-available/000-default.conf
+#restart apache with sudo systemctl restart apache2
+
+#start mysql with 'mysql -u root -p'
 
 
 
 #mysql setup
-create database main;
-use main;
+grant all privileges on *.* to 'kreegurc_phpUser'@'localhost' identified by 'phpUser1!';
+create database kreegurc_data;
+use kreegurc_data;
+
 create table latestValues(
 id int not null auto_increment primary key,
 tagName varchar(50),

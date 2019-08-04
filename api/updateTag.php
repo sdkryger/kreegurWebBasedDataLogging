@@ -13,6 +13,9 @@ $hostname = "localhost";
 $username = "phpUser";
 $password = "phpUser2";
 $dbName = "main";
+$username = "kreegurc_phpUser";
+$password = "phpUser1!";
+$dbName = "kreegurc_data";
 
 $mysqli = new mysqli($hostname,$username,$password,$dbName);
 
