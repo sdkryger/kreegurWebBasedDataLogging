@@ -4,7 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="utf-8">
         <title>
-            Kreegur - web based data logging
+            Kreegur - input values
         </title>
         <style>
             * {
@@ -31,21 +31,36 @@
                         Value
                     </td>
                     <td>
-                        Last updated
+                        Action
                     </td>
                 </tr>
             </thead>
             <tbody id="latestValues">
             </tbody>
         </table>
-        <a href="inputValues.php" target="_blank">Input values</a>
-        <script src = "js/jquery-3.3.1.min.js"></script>
+<script src = "js/jquery-3.3.1.min.js"></script>
 		<script src = "js/jquery-ui.min.js"></script>
         <script>
             var nodeId = -1;
 			$(document).ready(function(){
                 //alert("working");
-                setInterval(updateValues, 500);
+                $('body').on('click','.updateValue',function(){
+                   var tagName = $(this).attr('id');
+                    var value = $("#input"+tagName).val();
+                    //alert("Should update tagName: "+tagName+" to value: "+value);
+                    $.post(
+                        'api/updateTag.php',
+                        {
+                            tagName: tagName,
+                            value: value
+                        },
+                        function(data){
+                            console.log(JSON.stringify(data));
+                        },
+                        'json'
+                    );
+                });
+                updateValues();
             });
             function updateValues(){
                 $.post(
@@ -56,11 +71,12 @@
                         $.each(data.values,function(index, value){
                             var html = '<tr>';
                             html += '<td>'+value.name+'</td>';
-                            html += '<td>'+value.value+'</td>';
-                            html += '<td>'+value.lastUpdate+'</td>';
+                            html += '<td><input type="text" id="input'+value.name+'" value="'+value.value+'"></td>';
+                            html += '<td><button class="myButtons updateValue" id="'+value.name+'">Update</button></td>';
                             html += '</tr>';
                             $("#latestValues").append(html);
                         });
+                        $(".myButtons").button();
                     },
                     'json'
                 );
