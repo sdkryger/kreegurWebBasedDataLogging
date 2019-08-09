@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta charset="utf-8">
         <title>
             Kreegur - web based data logging
         </title>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
         <style>
             * {
                 box-sizing: border-box;
@@ -18,10 +19,10 @@
                 padding:5px;
             }
 		</style>
-		<link href="css/jquery-ui.css" rel="stylesheet">
+		
     </head>
     <body>
-        <table>
+        <table class="table table-fluid">
             <thead>
                 <tr>
                     <td>
@@ -40,7 +41,9 @@
         </table>
         <a href="inputValues.php" target="_blank">Input values</a>
         <script src = "js/jquery-3.3.1.min.js"></script>
-		<script src = "js/jquery-ui.min.js"></script>
+        <script src="js/popper.min.js" type="text/javascript"></script>
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>
+		
         <script>
             var nodeId = -1;
 			$(document).ready(function(){
